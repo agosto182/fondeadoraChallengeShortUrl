@@ -1,7 +1,7 @@
 import logging
 import random
 import string
-from fastapi import HTTPException 
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from models.url import Url
 
@@ -13,7 +13,10 @@ def create(db: Session, url: str):
 
     logger.info("Trying to create new url with: %s", url)
     try:
-        random_code = "".join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=5))
+        random_code = "".join(random.choices(
+            string.ascii_uppercase + string.ascii_lowercase,
+            k=5
+        ))
         logger.info("New code is %s", random_code)
         url = Url(original_url=url, short_url=random_code)
         logger.info("New url object created %s", url.__dict__)

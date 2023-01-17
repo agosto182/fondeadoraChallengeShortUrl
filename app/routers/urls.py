@@ -23,5 +23,8 @@ async def get_url(code: str, db=Depends(get_db)):
 @router.post("/")
 async def create_url(body: UrlInput, db=Depends(get_db)):
     """POST route to create a new short url"""
-    short_url = urls.create(db, body.url)
+    code = urls.create(db, body.url)
+
+    # Here hardcoded but it needs to be depending of the stage env
+    short_url = f'http://127.0.0.1:8000/{code}'
     return {"short_url": short_url}

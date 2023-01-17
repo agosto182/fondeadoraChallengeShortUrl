@@ -9,6 +9,8 @@ logger = logging.getLogger("uvicorn")
 logger.setLevel(logging.DEBUG)
 
 def create(db: Session, url: str):
+    """Helper function to create a new url object on database"""
+
     logger.info("Trying to create new url with: %s", url)
     try:
         random_code = "".join(random.choices(string.ascii_uppercase + string.ascii_lowercase, k=5))
@@ -23,6 +25,8 @@ def create(db: Session, url: str):
         raise HTTPException(status_code=500, detail="An error as ocurred")
 
 def get(db: Session, code: str):
+    """Helper function to get an url object from database filtered by code"""
+
     logger.info("Looking for url with code %s", code)
     try:
         url = db.query(Url).filter_by(short_url=code).one()

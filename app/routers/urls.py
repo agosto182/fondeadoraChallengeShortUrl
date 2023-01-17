@@ -12,10 +12,12 @@ async def get_index(db = Depends(get_db)):
 
 @router.get('/{code}')
 async def get_url(code: str, db = Depends(get_db)):
+    """GET route to get the original url from a code"""
     url = urls.get(db, code)
     return { 'url': url.original_url }
 
 @router.post('/')
 async def create_url(body: UrlInput, db = Depends(get_db)):
+    """POST route to create a new short url"""
     short_url = urls.create(db, body.url)
     return { 'short_url': short_url }

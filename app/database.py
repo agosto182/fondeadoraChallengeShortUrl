@@ -1,8 +1,16 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from config import settings
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
+db_url = ''
+
+if (settings.ENV == 'test'):
+    db_url = settings.DB_TEST_URL
+else:
+    db_url = settings.DB_URL
+
+SQLALCHEMY_DATABASE_URL = db_url
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}

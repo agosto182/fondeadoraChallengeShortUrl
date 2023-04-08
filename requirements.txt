@@ -2,3 +2,4 @@ fastapi[all]
 sqlalchemy
 flake8
 pytest
+pytest-cov

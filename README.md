@@ -33,7 +33,13 @@ $ uvicorn main:app --app-dir app
 With all the dependencies installed run the follow command:
 
 ```
-$ pytest
+$ ENV=test pytest
+```
+
+For see coverage of the testÑ
+
+```
+$ ENV=test pytest --cov=app
 ```
 
 
